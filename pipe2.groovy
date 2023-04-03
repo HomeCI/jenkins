@@ -1,12 +1,20 @@
-pipelineJob('HelloExample') {
-
-    definition {
-        cps {
-            script('''
-                node {
-                    load "/home/pipe2/Jenkinsfile"
-                }
-            ''')
+pipeline('holi') {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building...'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+            }
         }
     }
 }
