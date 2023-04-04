@@ -1,11 +1,11 @@
 def call(Map params) {
 
-    String tagname = params.tagname 
-    boolean deploy = params.deploy ?: true
-    boolean dbuild = params.dbuild ?: true
-    String dockerfilePath = params.dockerfilePath ?: "."
-    String username = params.username
-    boolean pullToRegistry = params.pullToRegistry ?: false
+    tagname = params.tagname 
+    deploy = params.deploy ?: true
+    dbuild = params.dbuild ?: true
+    dockerfilePath = params.dockerfilePath ?: "."
+    username = params.username
+    pullToRegistry = params.pullToRegistry ?: false
     
     /** Input */
     stage('Validating input'){
