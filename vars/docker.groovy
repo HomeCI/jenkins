@@ -48,7 +48,7 @@ def call(Map params) {
             //sh "exit $errorCount"
         }
 
-        asciiBox("Validación correcta")
+        println("Validación correcta")
     }
 
     stage('Building'){
