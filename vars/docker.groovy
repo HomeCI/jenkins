@@ -28,7 +28,7 @@ def call(Map params) {
         def dockerfile = new File(dockerfilePath, "Dockerfile")
         if (dbuild && !dockerfile.exists()) {
             error("El archivo Dockerfile no se encuentra en la ruta especificada.")
-            errorCount++
+            //errorCount++
         }
 
         def dockercompose = new File(dockercomposePath, "docker-compose.yml")
