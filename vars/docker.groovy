@@ -38,7 +38,7 @@ def call(Map params) {
             errorCount++
         }
 
-        if (pullToRegistry && !tagname.matches("^[a-zA-Z0-9]+(/[a-zA-Z0-9]+)*(:[a-zA-Z0-9.-]+)?$")) {
+        if (pullToRegistry && !tagname.matches("^[a-zA-Z0-9]+(/[a-zA-Z0-9]+)*(:[a-zA-Z0-9.-]+)?\\$")) {
             error("El nombre de etiqueta de DockerHub no cumple con la sintaxis de etiqueta de imagen de Docker.")
             errorCount++
         }
