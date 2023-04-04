@@ -1,6 +1,7 @@
 library 'hci@main'
 
 node(){
+    deleteDir()
     stage('Clonando repositorio'){
         checkout([
             $class: 'GitSCM',
