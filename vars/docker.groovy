@@ -15,13 +15,13 @@ def call(Map params) {
         // Validar el patrón de etiqueta de imagen de Docker
         if (!tagname.matches("^[a-zA-Z0-9_][a-zA-Z0-9_.-]{0,127}(:[a-zA-Z0-9_.-]{1,32})?\$")) {
             error("La etiqueta de imagen no sigue el patrón de imagen de Docker.")
-            errorCount++
+            //errorCount++
         }
 
         // Validar si pullToRegistry está marcado y si se proporcionó un nombre de usuario
         if (pullToRegistry && params.username == null) {
             error("Se requiere el nombre de usuario para hacer pull de la imagen del registro de contenedores.")
-            //errorCount++
+            errorCount++
         }
 
         def dockerfile = new File(dockerfilePath, "Dockerfile")
