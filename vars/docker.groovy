@@ -1,5 +1,7 @@
 def call(Map params) {
-
+    /** Input */
+    stage('Validating input'){
+        
     def tagname = params.tagname 
     def deploy = params.deploy ?: true
     def dbuild = params.dbuild ?: true
@@ -7,8 +9,7 @@ def call(Map params) {
     def username = params.username
     def pullToRegistry = params.pullToRegistry ?: false
     
-    /** Input */
-    stage('Validating input'){
+
 
         println(params)
         // Validar el patrón de etiqueta de imagen de Docker
