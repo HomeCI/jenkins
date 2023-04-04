@@ -1,3 +1,3 @@
-def call(){
-    println("Hello")
+def call(message){
+    println("Hello, has escrito, ${message}")
 }

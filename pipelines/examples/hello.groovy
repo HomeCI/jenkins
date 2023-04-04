@@ -1,3 +1,5 @@
+library 'hci@main'
+
 node(){
-    println("Hello")
+    hello("sdfasdfsd")
 }
