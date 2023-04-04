@@ -9,10 +9,9 @@ def call(Map params) {
     boolean pullToRegistry = params.pullToRegistry != null ? params.pullToRegistry : false
     
     /** Input */
-    int errorCount = 0
-
     stage('Validating input'){
-
+         int errorCount = 0
+         
         println(params)
         // Validar el patrón de etiqueta de imagen de Docker
         // Validar el patrón de etiqueta de imagen de Docker
