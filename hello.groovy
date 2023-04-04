@@ -40,7 +40,7 @@ pipelineJob('hello') {
                     branch('$BRANCHSPEC')
                 }
             }
-            scriptPath("pipelines/examples/hello.grooy")
+            scriptPath("pipelines/examples/hello.groovy")
         }
     }
 }
