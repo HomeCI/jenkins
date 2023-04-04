@@ -9,6 +9,7 @@ def call(Map params) {
     
     /** Input */
     stage('Validating input'){
+        info(params)
         // Validar el patrón de etiqueta de imagen de Docker
         if (!tagname.matches("^[a-zA-Z0-9_][a-zA-Z0-9_.-]{0,127}(:[a-zA-Z0-9_.-]{1,32})?\$")) {
             error("La etiqueta de imagen no sigue el patrón de imagen de Docker.")
