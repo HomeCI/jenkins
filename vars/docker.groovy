@@ -21,7 +21,7 @@ def call(Map params) {
         // Validar si pullToRegistry está marcado y si se proporcionó un nombre de usuario
         if (pullToRegistry && params.username == null) {
             error("Se requiere el nombre de usuario para hacer pull de la imagen del registro de contenedores.")
-            errorCount++
+            //errorCount++
         }
 
         def dockerfile = new File(dockerfilePath, "Dockerfile")
@@ -38,7 +38,7 @@ def call(Map params) {
 
         if (pullToRegistry && !tagname.matches("^[a-zA-Z0-9]+(/[a-zA-Z0-9]+)*(:[a-zA-Z0-9.-]+)?\$")) {
             error("El nombre de etiqueta de DockerHub no cumple con la sintaxis de etiqueta de imagen de Docker.")
-            errorCount++
+            //errorCount++
         }
 
         if (errorCount > 0) {
