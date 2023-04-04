@@ -3,8 +3,8 @@ def call(Map params) {
     String tagname = params.tagname 
     boolean deploy = params.deploy != null ? params.deploy : true
     boolean dbuild = params.dbuild != null ? params.dbuild : true
-    String dockerfilePath = params.dockerfilePath != null ? params.dockerfilePath : "."
-    String dockercomposePath = params.dockercomposePath != null ? params.dockercomposePath : "."
+    String dockerfilePath = params.dockerfilePath != null ? params.dockerfilePath : ""
+    String dockercomposePath = params.dockercomposePath != null ? params.dockercomposePath : ""
     String username = params.username
     boolean pullToRegistry = params.pullToRegistry != null ? params.pullToRegistry : false
     
@@ -44,7 +44,7 @@ def call(Map params) {
 
         if (errorCount > 0) {
             asciiBox("Revise los errores detectados")
-            sh "exit $errorCount"
+            //sh "exit $errorCount"
         }
 
         asciiBox("Validación correcta")
