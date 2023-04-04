@@ -1,9 +1,13 @@
-def call(String tagname, 
-        boolean deploy=true, 
-        String dockerfilePath=".", 
-        String username = null, 
-        boolean pullToRegistry = false) {
+def call(Map params) {
 
+    String tagname = params.tagname 
+    boolean deploy = params.deploy ?: true
+    boolean build = params.build ?: true
+    String dockerfilePath = params.dockerfilePath ?: "."
+    String username = params.username
+    boolean pullToRegistry = params.pullToRegistry ?: false
+    
+    /** Input */
     stage('Validating input'){
         // Validar el patrón de etiqueta de imagen de Docker
         if (!tagname.matches("^[a-zA-Z0-9_][a-zA-Z0-9_.-]{0,127}(:[a-zA-Z0-9_.-]{1,32})?\$")) {
@@ -18,7 +22,7 @@ def call(String tagname,
         }
 
         def dockerfile = new File(dockerfilePath, "Dockerfile")
-        if (!dockerfile.exists()) {
+        if (build && !dockerfile.exists()) {
             error("El archivo Dockerfile no se encuentra en la ruta especificada.")
             sh 'exit 1'
         }
