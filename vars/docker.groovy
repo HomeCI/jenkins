@@ -4,6 +4,7 @@ def call(Map params) {
     boolean deploy = params.deploy != null ? params.deploy : true
     boolean dbuild = params.dbuild != null ? params.dbuild : true
     String dockerfilePath = params.dockerfilePath != null ? params.dockerfilePath : "."
+    String dockercomposePath = params.dockercomposePath != null ? params.dockercomposePath : "."
     String username = params.username
     boolean pullToRegistry = params.pullToRegistry != null ? params.pullToRegistry : false
     
@@ -26,6 +27,12 @@ def call(Map params) {
         def dockerfile = new File(dockerfilePath, "Dockerfile")
         if (dbuild && !dockerfile.exists()) {
             error("El archivo Dockerfile no se encuentra en la ruta especificada.")
+            sh 'exit 1'
+        }
+
+        def dockercompose = new File(dockercomposePath, "docker-compose.yml")
+        if (deploy && !dockercompose.exists()) {
+            error("El archivo docker-compose.yml no se encuentra en la ruta especificada.")
             sh 'exit 1'
         }
 
