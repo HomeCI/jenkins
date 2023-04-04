@@ -40,7 +40,7 @@ def call(Map params) {
     }
 
     stage('Building'){
-       println("Building")
+       println("Construyendo la imagen ...")
        sh """
        set -x 
        cd ${dockerfilePath}
@@ -49,9 +49,21 @@ def call(Map params) {
     }
 
     stage('Deploying'){
-        println("Deploying")
+        println("Desplegando el compose ... ")
+        sh """
+        set -x 
+        cd ${dockercomposePath}
+        docker-compose up -d
+        """
+    }
+
+    stage('Promoting'){
+        println("Promocionando imagen ... ")
+        sh """
+        set -x 
+        docker pull
+        """
     }
 
 
-    // Lógica adicional de la función aquí
 }
