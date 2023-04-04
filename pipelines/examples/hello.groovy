@@ -1,5 +1,5 @@
 library 'hci@main'
 
 node(){
-    docker("122*dsf2380r9882093r8=))()mytag:lates=)=)===))=t")
+    docker("mypipeline:1.0.0")
 }
