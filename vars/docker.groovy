@@ -6,7 +6,7 @@ def call(String tagname, String username = null, boolean pullToRegistry = false)
     final Logger logger = LoggerFactory.getLogger("Docker");
 
     // Validar el patrón de etiqueta de imagen de Docker
-    if (!tagname.matches("^[a-zA-Z0-9_][a-zA-Z0-9_.-]{0,127}(:[a-zA-Z0-9_.-]{1,32})?$")) {
+    if (!tagname.matches("^[a-zA-Z0-9_][a-zA-Z0-9_.-]{0,127}(:[a-zA-Z0-9_.-]{1,32})?\$")) {
         error("La etiqueta de imagen no sigue el patrón de imagen de Docker.")
         return
     }
