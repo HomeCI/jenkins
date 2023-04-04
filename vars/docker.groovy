@@ -1,15 +1,14 @@
 def call(Map params) {
+
+    String tagname = params.tagname 
+    boolean deploy = params.deploy != null ? params.deploy : true
+    boolean build = params.build != null ? params.build : true
+    String dockerfilePath = params.dockerfilePath != null ? params.dockerfilePath : "."
+    String username = params.username
+    boolean pullToRegistry = params.pullToRegistry != null ? params.pullToRegistry : false
+    
     /** Input */
     stage('Validating input'){
-        
-    def tagname = params.tagname 
-    def deploy = params.deploy ?: true
-    def dbuild = params.dbuild ?: true
-    def dockerfilePath = params.dockerfilePath ?: "."
-    def username = params.username
-    def pullToRegistry = params.pullToRegistry ?: false
-    
-
 
         println(params)
         // Validar el patrón de etiqueta de imagen de Docker
