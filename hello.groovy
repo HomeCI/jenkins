@@ -34,7 +34,7 @@ pipelineJob('hello') {
             scm {
                 git {
                     remote {
-                        url('https://git.svb.lacaixa.es/cbk/k8s/kfkalm/kfkpip.git')
+                        url('https://github.com/HomeCI/jenkins.git')
                         credentials('jenkins-dummy-user')
                     }
                     branch('$BRANCHSPEC')
