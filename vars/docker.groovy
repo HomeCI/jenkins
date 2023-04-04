@@ -67,7 +67,7 @@ def call(Map params) {
         sh """
         set -x 
         cd ${dockercomposePath}
-        docker-compose up -d
+        docker compose up -d
         """
     }
 
