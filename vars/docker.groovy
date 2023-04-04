@@ -55,10 +55,10 @@ def call(Map params) {
        println("Construyendo la imagen ...")
        sh """
        set -x 
-       ls -a
+       ls -la
        pwd
        cd ${dockerfilePath}
-       docker build -t ${tagname} $(pwd)
+       docker build -t ${tagname} .
        """
     }
 
