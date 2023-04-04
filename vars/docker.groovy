@@ -13,7 +13,6 @@ def call(Map params) {
         int errorCount = 0
         println(params)
         // Validar el patrón de etiqueta de imagen de Docker
-        // Validar el patrón de etiqueta de imagen de Docker
         if (!tagname.matches("^[a-zA-Z0-9_][a-zA-Z0-9_.-]{0,127}(:[a-zA-Z0-9_.-]{1,32})?\$")) {
             error("La etiqueta de imagen no sigue el patrón de imagen de Docker.")
             errorCount++
@@ -37,7 +36,7 @@ def call(Map params) {
             errorCount++
         }
 
-        if (pullToRegistry && !tagname.matches("^[a-zA-Z0-9]+(\/[a-zA-Z0-9]+)*(:[a-zA-Z0-9.-]+)?\$")) {
+        if (pullToRegistry && !tagname.matches("^[a-zA-Z0-9]+(/[a-zA-Z0-9]+)*(:[a-zA-Z0-9.-]+)?\$")) {
             error("El nombre de etiqueta de DockerHub no cumple con la sintaxis de etiqueta de imagen de Docker.")
             errorCount++
         }
@@ -72,7 +71,7 @@ def call(Map params) {
         println("Promocionando imagen ... ")
         sh """
         set -x 
-        docker pull
+        docker pull ${tagname}
         """
     }
 
