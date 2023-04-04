@@ -33,6 +33,7 @@ def call(Map params) {
         def dockercompose = new File(dockercomposePath, "docker-compose.yml")
         if (deploy && !dockercompose.exists()) {
             error("El archivo docker-compose.yml no se encuentra en la ruta especificada.")
+            sh "ls -a"
             errorCount++
         }
 
