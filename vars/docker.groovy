@@ -34,7 +34,11 @@ def call(Map params) {
 
     stage('Building'){
        println("Building")
-       sh ""
+       sh '''
+       set -x 
+       cd ${dockerfilePath}
+       docker build -t ${tagname} .
+       '''
     }
 
     stage('Deploying'){
