@@ -2,7 +2,7 @@ def call(Map params) {
 
     String tagname = params.tagname 
     boolean deploy = params.deploy ?: true
-    boolean build = params.build ?: true
+    boolean ibuild = params.build ?: true
     String dockerfilePath = params.dockerfilePath ?: "."
     String username = params.username
     boolean pullToRegistry = params.pullToRegistry ?: false
@@ -24,7 +24,7 @@ def call(Map params) {
         }
 
         def dockerfile = new File(dockerfilePath, "Dockerfile")
-        if (params.build && !dockerfile.exists()) {
+        if (ibuild && !dockerfile.exists()) {
             error("El archivo Dockerfile no se encuentra en la ruta especificada.")
             sh 'exit 1'
         }
@@ -34,6 +34,7 @@ def call(Map params) {
 
     stage('Building'){
        println("Building")
+       sh ""
     }
 
     stage('Deploying'){
