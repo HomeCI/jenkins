@@ -6,7 +6,7 @@ node(){
         extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'jenkins']],
         submoduleCfg: [], userRemoteConfigs: [[ url: 'https://github.com/alpeza/DummyWeb.git']]
         ])
-
+        sh "ls -a"
         def pipelineScript = "Jenkinsfile"
         def scmVars = checkout(scm).getEnvVars()
         load(pipelineScript)
