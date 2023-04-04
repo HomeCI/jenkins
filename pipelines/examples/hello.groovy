@@ -7,9 +7,7 @@ node(){
         submoduleCfg: [], userRemoteConfigs: [[ url: 'https://github.com/alpeza/DummyWeb.git']]
         ])
         sh "ls -a"
-        def pipelineScript = "Jenkinsfile"
-        def scmVars = checkout(scm).getEnvVars()
-        load(pipelineScript)
+        load('Jenkinsfile')
     }
     //docker tagname: "mypipeline:1.0.0", dbuild: false, pullToRegistry: false
 }
