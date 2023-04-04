@@ -1,10 +1,8 @@
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-def call(String tagname, String username = null, boolean pullToRegistry = false) {
-    // Crear un objeto Logger
-    final Logger logger = LoggerFactory.getLogger("Docker");
-
+def call(String tagname, 
+        boolean deploy=true, 
+        Sting dockerfilePath=".", 
+        String username = null, 
+        boolean pullToRegistry = false) {
 
     stage('Validating input'){
         // Validar el patrón de etiqueta de imagen de Docker
@@ -15,19 +13,25 @@ def call(String tagname, String username = null, boolean pullToRegistry = false)
 
         // Validar si pullToRegistry está marcado y si se proporcionó un nombre de usuario
         if (pullToRegistry && username == null) {
-            logger.error("Se requiere el nombre de usuario para hacer pull de la imagen del registro de contenedores.")
+            error("Se requiere el nombre de usuario para hacer pull de la imagen del registro de contenedores.")
             sh 'exit 1'
         }
 
-        logger.info("Validación correcta")
+        def dockerfile = new File(dockerfilePath, "Dockerfile")
+        if (!dockerfile.exists()) {
+            error("El archivo Dockerfile no se encuentra en la ruta especificada.")
+            sh 'exit 1'
+        }
+
+        info("Validación correcta")
     }
 
     stage('Building'){
-       logger.info("Building")
+       info("Building")
     }
 
     stage('Deploying'){
-        logger.info("Deploying")
+        info("Deploying")
     }
 
 
