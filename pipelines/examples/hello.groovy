@@ -1,12 +1,10 @@
 library 'hci@main'
 
 node(){
-    deleteDir()
     stage('Clonando repositorio'){
         checkout([
             $class: 'GitSCM',
             branches: [[name: 'main']],
-            doGenerateSubmoduleConfigurations: false,
             userRemoteConfigs: [[url: 'https://github.com/alpeza/DummyWeb.git']],
             extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'repo']]
         ])

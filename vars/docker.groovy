@@ -10,6 +10,7 @@ def call(Map params) {
     
     /** Input */
     stage('Validating input'){
+        print("Aquiii")
         int errorCount = 0
         println(params)
         // Validar el patrón de etiqueta de imagen de Docker
