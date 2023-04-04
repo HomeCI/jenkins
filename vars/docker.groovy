@@ -18,7 +18,7 @@ def call(Map params) {
         }
 
         // Validar si pullToRegistry está marcado y si se proporcionó un nombre de usuario
-        if (pullToRegistry && username == null) {
+        if (pullToRegistry && params.username == null) {
             error("Se requiere el nombre de usuario para hacer pull de la imagen del registro de contenedores.")
             sh 'exit 1'
         }
