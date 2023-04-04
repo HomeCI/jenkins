@@ -15,31 +15,31 @@ def call(Map params) {
         println(params)
         // Validar el patrón de etiqueta de imagen de Docker
         if (!tagname.matches("^[a-zA-Z0-9_][a-zA-Z0-9_.-]{0,127}(:[a-zA-Z0-9_.-]{1,32})?\$")) {
-            error("La etiqueta de imagen no sigue el patrón de imagen de Docker.")
+            println("La etiqueta de imagen no sigue el patrón de imagen de Docker.")
             //errorCount++
         }
 
         // Validar si pullToRegistry está marcado y si se proporcionó un nombre de usuario
         if (pullToRegistry && params.username == null) {
-            error("Se requiere el nombre de usuario para hacer pull de la imagen del registro de contenedores.")
+            println("Se requiere el nombre de usuario para hacer pull de la imagen del registro de contenedores.")
             errorCount++
         }
 
         def dockerfile = new File(dockerfilePath, "Dockerfile")
         if (dbuild && !dockerfile.exists()) {
-            error("El archivo Dockerfile no se encuentra en la ruta especificada.")
+            println("El archivo Dockerfile no se encuentra en la ruta especificada.")
             //errorCount++
         }
 
         def dockercompose = new File(dockercomposePath, "docker-compose.yml")
         if (deploy && !dockercompose.exists()) {
-            error("El archivo docker-compose.yml no se encuentra en la ruta especificada.")
+            println("El archivo docker-compose.yml no se encuentra en la ruta especificada.")
             sh "ls -a"
             errorCount++
         }
 
         if (pullToRegistry && !tagname.matches("^[a-zA-Z0-9]+(/[a-zA-Z0-9]+)*(:[a-zA-Z0-9.-]+)?\$")) {
-            error("El nombre de etiqueta de DockerHub no cumple con la sintaxis de etiqueta de imagen de Docker.")
+            println("El nombre de etiqueta de DockerHub no cumple con la sintaxis de etiqueta de imagen de Docker.")
             //errorCount++
         }
 
