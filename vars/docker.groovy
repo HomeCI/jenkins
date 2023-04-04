@@ -1,6 +1,6 @@
 def call(String tagname, 
         boolean deploy=true, 
-        Sting dockerfilePath=".", 
+        String dockerfilePath=".", 
         String username = null, 
         boolean pullToRegistry = false) {
 
