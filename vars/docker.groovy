@@ -24,7 +24,7 @@ def call(Map params) {
         }
 
         def dockerfile = new File(dockerfilePath, "Dockerfile")
-        if (build && !dockerfile.exists()) {
+        if (params.build && !dockerfile.exists()) {
             error("El archivo Dockerfile no se encuentra en la ruta especificada.")
             sh 'exit 1'
         }
