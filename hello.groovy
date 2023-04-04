@@ -35,7 +35,6 @@ pipelineJob('hello') {
                 git {
                     remote {
                         url('https://github.com/HomeCI/jenkins.git')
-                        credentials('jenkins-dummy-user')
                     }
                     branch('$BRANCHSPEC')
                 }

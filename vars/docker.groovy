@@ -69,11 +69,13 @@ def call(Map params) {
 
     stage('Promoting'){
         println("Promocionando imagen ... ")
-        sh """
-        set -x 
-        docker pull ${tagname}
-        """
+        withCredentials([usernamePassword(credentialsId: username, passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
+            sh """
+            set -x;
+            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD"
+            docker pull ${tagname}
+            """
+        }
     }
-
 
 }
