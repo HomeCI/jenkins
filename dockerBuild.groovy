@@ -1,4 +1,4 @@
-pipelineJob('my-pipeline-job') {
+pipelineJob('DockerBuild') {
     parameters {
         stringParam {
             name('tagname')
