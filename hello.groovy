@@ -1,54 +1,45 @@
-pipelineJob('my-pipeline-job') {
+pipelineJob('hello') {
+    description('Pipeline template de ejemplo')
     parameters {
         stringParam {
-            name('tagname')
-            defaultValue('')
-            description('Nombre de la etiqueta para la imagen de Docker')
-        }
-        booleanParam {
-            name('deploy')
-            defaultValue(true)
-            description('¿Realizar el despliegue de la imagen de Docker?')
-        }
-        booleanParam {
-            name('dbuild')
-            defaultValue(true)
-            description('¿Construir la imagen de Docker?')
-        }
-        stringParam {
-            name('dockerfilePath')
-            defaultValue('.')
-            description('Ruta del archivo Dockerfile')
-        }
-        stringParam {
-            name('dockercomposePath')
-            defaultValue('.')
-            description('Ruta del archivo docker-compose')
-        }
-        stringParam {
-            name('credentialsId')
-            defaultValue('')
-            description('ID de las credenciales para el registro de Docker')
-        }
-        booleanParam {
-            name('pullToRegistry')
-            defaultValue(false)
-            description('¿Realizar la carga de la imagen a un registro de Docker?')
+            name('message')
+            defaultValue('Hello Jenkins')
+            description('Mensaje de saludo')
+            trim(true)
         }
     }
 
     definition {
-        cps {
-            script("""
-                // Aquí puedes agregar los pasos que quieras para construir y desplegar tu imagen de Docker
-                echo "El valor de tagname es: \${params.tagname}"
-                echo "El valor de deploy es: \${params.deploy}"
-                echo "El valor de dbuild es: \${params.dbuild}"
-                echo "La ruta del Dockerfile es: \${params.dockerfilePath}"
-                echo "La ruta del archivo docker-compose es: \${params.dockercomposePath}"
-                echo "El ID de las credenciales es: \${params.credentialsId}"
-                echo "El valor de pullToRegistry es: \${params.pullToRegistry}"
-            """)
+        configure { root ->
+            def paramDefs = root / 'properties' / 'hudson.model.ParametersDefinitionProperty' / 'parameterDefinitions'
+
+            paramDefs << 'com.seitenbau.jenkins.plugins.dynamicparameter.StringParameterDefinition' {
+                delegate.createNode('name', 'BRANCHSPEC')
+                delegate.createNode('__script', 'def getversion= ["/bin/bash", "-c", "cd /var/jenkins_home/version;cat version.txt"].execute().text;def version=getversion.readLines();return version[0]')
+
+                __localBaseDirectory(serialization: 'custom') {
+                    'hudson.FilePath' {
+                        'default' {
+                            delegate.createNode('remote', "${JENKINS_HOME}/dynamic_parameter/classpath")
+                        }
+                        delegate.createNode('boolean', true)
+                    }
+                }
+
+                delegate.createNode('__remoteBaseDirectory', 'dynamic_parameter_classpath')
+                delegate.createNode('__classPath', '')
+            }
+        }
+        cpsScm {
+            scm {
+                git {
+                    remote {
+                        url('https://github.com/HomeCI/jenkins.git')
+                    }
+                    branch('$BRANCHSPEC')
+                }
+            }
+            scriptPath("pipelines/examples/hello.groovy")
         }
     }
 }
