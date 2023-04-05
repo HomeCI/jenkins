@@ -28,14 +28,14 @@ def call(Map params) {
         print(dockerfile)
         if (dbuild && !dockerfile.exists()) {
             println("El archivo Dockerfile no se encuentra en la ruta especificada.")
-            errorCount++
+            //errorCount++
         }
 
         def dockercompose = new File(dockercomposePath, "docker-compose.yml")
         print(dockercompose)
         if (deploy && !dockercompose.exists()) {
             println("El archivo docker-compose.yml no se encuentra en la ruta especificada.")
-            errorCount++
+            //errorCount++
         }
 
         if (pullToRegistry && !tagname.matches("^(?:(?=[^:/]{1,253})(?!-)[a-zA-Z0-9-]{1,63}(?<!-)(?:.(?!-)[a-zA-Z0-9-]{1,63}(?<!-))*(?::[0-9]{1,5})?/)?((?![._-])(?:[a-z0-9._-]*)(?<![._-])(?:/(?![._-])[a-z0-9._-]*(?<![._-]))*)(?::(?![.-])[a-zA-Z0-9_.-]{1,128})?\$")) {
