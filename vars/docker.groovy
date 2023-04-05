@@ -52,7 +52,7 @@ def call(Map params) {
     }
 
     stage('Building'){
-       println("Construyendo la imagen ...")
+       asciiBox("Construyendo la imagen ...")
        sh """
        set -x 
        cd ${dockerfilePath}
@@ -61,7 +61,7 @@ def call(Map params) {
     }
 
     stage('Deploying'){
-        println("Desplegando el compose ... ")
+        asciiBox("Desplegando el compose ... ")
         sh """
         set -x 
         cd ${dockercomposePath}
@@ -70,7 +70,7 @@ def call(Map params) {
     }
 
     stage('Promoting'){
-        println("Promocionando imagen ... ")
+        asciiBox("Promocionando imagen ... ")
         withCredentials([usernamePassword(credentialsId: credentialsId, passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
             sh """
             set -x;
