@@ -1,4 +1,4 @@
-pipeline('DockerBuild') {
+pipelineJob('DockerBuild') {
     description('Pipeline encargada del build, despliegue y promoción de imágenes Docker')
     parameters {
         string(name: 'tagname', defaultValue: '', description: 'Nombre de la etiqueta para la imagen de Docker')
