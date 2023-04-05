@@ -19,8 +19,8 @@ def call(Map params) {
         }
 
         // Validar si pullToRegistry está marcado y si se proporcionó un nombre de usuario
-        if (pullToRegistry && params.username == null) {
-            println("Se requiere el nombre de usuario para hacer pull de la imagen del registro de contenedores.")
+        if (pullToRegistry && params.credentialsId == null) {
+            println("Se requiere de un credentialsId para hacer push de la imagen del registro de contenedores.")
             errorCount++
         }
 
