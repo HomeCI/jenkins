@@ -75,7 +75,7 @@ def call(Map params) {
             sh """
             set -x;
             docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
-            docker pull ${tagname}
+            docker push ${tagname}
             """
         }
     }
