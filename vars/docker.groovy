@@ -5,7 +5,7 @@ def call(Map params) {
     boolean dbuild = params.dbuild != null ? params.dbuild : true
     String dockerfilePath = params.dockerfilePath != null ? params.dockerfilePath : "."
     String dockercomposePath = params.dockercomposePath != null ? params.dockercomposePath : "."
-    String username = params.username
+    String credentialsId = params.credentialsId
     boolean pullToRegistry = params.pullToRegistry != null ? params.pullToRegistry : false
     
     /** Input */
@@ -71,7 +71,7 @@ def call(Map params) {
 
     stage('Promoting'){
         println("Promocionando imagen ... ")
-        withCredentials([usernamePassword(credentialsId: username, passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
+        withCredentials([usernamePassword(credentialsId: credentialsId, passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
             sh """
             set -x;
             docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD"
