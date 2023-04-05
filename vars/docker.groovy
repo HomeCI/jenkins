@@ -10,7 +10,6 @@ def call(Map params) {
     
     /** Input */
     stage('Validating input'){
-        print("Aquiii")
         int errorCount = 0
         println(params)
         // Validar el patrón de etiqueta de imagen de Docker
@@ -36,7 +35,6 @@ def call(Map params) {
         print(dockercompose)
         if (deploy && !dockercompose.exists()) {
             println("El archivo docker-compose.yml no se encuentra en la ruta especificada.")
-            sh "ls -a"
             errorCount++
         }
 
@@ -57,8 +55,6 @@ def call(Map params) {
        println("Construyendo la imagen ...")
        sh """
        set -x 
-       ls -la
-       pwd
        cd ${dockerfilePath}
        docker build -t ${tagname} .
        """
