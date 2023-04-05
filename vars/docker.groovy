@@ -44,8 +44,8 @@ def call(Map params) {
         }
 
         if (errorCount > 0) {
-            println("Revise los errores detectados")
-            //sh "exit $errorCount"
+            asciiBox("Revise los errores detectados")
+            sh "exit $errorCount"
         }
 
         println("Validación correcta")
