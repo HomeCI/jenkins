@@ -9,5 +9,5 @@ def call(String str) {
     ${middleRow}
     ${emptyRow}
     ${topBottomRow}
-    """
+    """)
 }
