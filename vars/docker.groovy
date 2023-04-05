@@ -74,7 +74,7 @@ def call(Map params) {
         withCredentials([usernamePassword(credentialsId: credentialsId, passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
             sh """
             set -x;
-            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD"
+            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
             docker pull ${tagname}
             """
         }
