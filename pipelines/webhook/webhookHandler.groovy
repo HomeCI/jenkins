@@ -2,8 +2,8 @@ library 'hci@main'
 
 node(){
     stage('Clonando repositorio'){
-        sh "echo $ref"
-       
-
+        //sh "echo $ref"
+        println("Aqui")
+        println($ref)
     }
 }
