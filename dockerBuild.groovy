@@ -69,3 +69,4 @@ pipelineJob('DockerBuild') {
             scriptPath("pipelines/docker/dockerBuild.groovy")
         }
     }
+}
