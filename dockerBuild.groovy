@@ -40,14 +40,14 @@ pipelineJob('DockerBuild') {
     definition {
         cps {
             script("""
-                // Aquí puedes agregar los pasos que quieras para construir y desplegar tu imagen de Docker
-                echo "El valor de tagname es: \${params.tagname}"
-                echo "El valor de deploy es: \${params.deploy}"
-                echo "El valor de dbuild es: \${params.dbuild}"
-                echo "La ruta del Dockerfile es: \${params.dockerfilePath}"
-                echo "La ruta del archivo docker-compose es: \${params.dockercomposePath}"
-                echo "El ID de las credenciales es: \${params.credentialsId}"
-                echo "El valor de pullToRegistry es: \${params.pullToRegistry}"
+                library 'hci@main'
+                dockerCore tagname:\${params.tagname}
+                           deploy: \${params.deploy}
+                           build: \${params.dbuild}
+                           dockerfilePath: \${params.dockerfilePath}
+                           dockercomposePath: \${params.dockercomposePath}
+                           credentialsId: \${params.credentialsId}
+                           pullToRegistry: \${params.pullToRegistry}
             """)
         }
     }
