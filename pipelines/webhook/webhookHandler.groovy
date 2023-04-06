@@ -4,6 +4,9 @@ node(){
     stage('Clonando repositorio'){
         //sh "echo $ref"
         println("Aqui")
-        println($ref)
+        gitCommit = sh ( script: "echo $ref",returnStdout: true).trim()
+        def gitCommitParsed = new JsonSlurper().parseText(gitCommit)
+        println(gitCommitParsed)
+
     }
 }
