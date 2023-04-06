@@ -33,11 +33,17 @@ pipelineJob('WebHook') {
             regexpFilterExpression(".*")
         }
     }
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building...'
-            }
+    definition {
+    cps {
+    // Or just refer to a Jenkinsfile containing the pipeline
+    script('''
+        node {
+        stage('Some Stage') {
+        println "VARIABLE_FROM_POST: " + VARIABLE_FROM_POST
         }
+        }
+    ''')
+    sandbox()
+    }
     }
 }
