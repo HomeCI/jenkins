@@ -34,16 +34,36 @@ pipelineJob('WebHook') {
         }
     }
     definition {
-    cps {
-    // Or just refer to a Jenkinsfile containing the pipeline
-    script('''
-        node {
-        stage('Some Stage') {
-        println "VARIABLE_FROM_POST: " + VARIABLE_FROM_POST
+        configure { root ->
+            def paramDefs = root / 'properties' / 'hudson.model.ParametersDefinitionProperty' / 'parameterDefinitions'
+
+            paramDefs << 'com.seitenbau.jenkins.plugins.dynamicparameter.StringParameterDefinition' {
+                delegate.createNode('name', 'BRANCHSPEC')
+                delegate.createNode('__script', 'def getversion= ["/bin/bash", "-c", "cd /var/jenkins_home/version;cat version.txt"].execute().text;def version=getversion.readLines();return version[0]')
+
+                __localBaseDirectory(serialization: 'custom') {
+                    'hudson.FilePath' {
+                        'default' {
+                            delegate.createNode('remote', "${JENKINS_HOME}/dynamic_parameter/classpath")
+                        }
+                        delegate.createNode('boolean', true)
+                    }
+                }
+
+                delegate.createNode('__remoteBaseDirectory', 'dynamic_parameter_classpath')
+                delegate.createNode('__classPath', '')
+            }
         }
+        cpsScm {
+            scm {
+                git {
+                    remote {
+                        url('https://github.com/HomeCI/jenkins.git')
+                    }
+                    branch('$BRANCHSPEC')
+                }
+            }
+            scriptPath("pipelines/webhook/webhookHandler.groovy")
         }
-    ''')
-    sandbox()
-    }
     }
 }
