@@ -1,4 +1,4 @@
 def call(Map params) {
-    LinkedHashMap<T> newMap = new LinkedHashMap<T>(params);
-    build job: 'DockerBuild', parameters: newMap
+    def linkedHashMapParams = params as LinkedHashMap
+    build job: 'DockerBuild', parameters: linkedHashMapParams
 }
