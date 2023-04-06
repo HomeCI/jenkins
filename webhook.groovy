@@ -5,8 +5,8 @@ pipelineJob('WebHook') {
             genericVariables {
                 genericVariable {
                 key("ref")
-                value("\$.ref")
-                //expressionType("JSONPath") //Optional, defaults to JSONPath
+                value("\$")
+                expressionType("JSONPath") //Optional, defaults to JSONPath
                 //regexpFilter("") //Optional, defaults to empty string
                 //defaultValue("") //Optional, defaults to empty string
                 }
