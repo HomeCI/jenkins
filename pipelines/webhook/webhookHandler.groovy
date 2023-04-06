@@ -1,5 +1,5 @@
 library 'hci@main'
-
+import groovy.json.JsonSlurper
 node(){
     stage('Clonando repositorio'){
         //sh "echo $ref"
