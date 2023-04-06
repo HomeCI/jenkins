@@ -1,4 +1,4 @@
-pipelineJob('WebHook') {
+pipelineJob('WebhookOrchestrator') {
     description('Pipeline template de ejemplo')
     triggers {
         genericTrigger {
@@ -63,7 +63,7 @@ pipelineJob('WebHook') {
                     branch('$BRANCHSPEC')
                 }
             }
-            scriptPath("pipelines/webhook/webhookHandler.groovy")
+            scriptPath("pipelines/webhook/webhookOrchestrator.groovy")
         }
     }
 }

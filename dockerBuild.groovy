@@ -36,19 +36,36 @@ pipelineJob('DockerBuild') {
             description('¿Realizar la carga de la imagen a un registro de Docker?')
         }
     }
-
     definition {
-        cps {
-            script("""
-                library 'hci@main'
-                dockerCore tagname:\${params.tagname}
-                           deploy: \${params.deploy}
-                           build: \${params.dbuild}
-                           dockerfilePath: \${params.dockerfilePath}
-                           dockercomposePath: \${params.dockercomposePath}
-                           credentialsId: \${params.credentialsId}
-                           pullToRegistry: \${params.pullToRegistry}
-            """)
+        configure { root ->
+            def paramDefs = root / 'properties' / 'hudson.model.ParametersDefinitionProperty' / 'parameterDefinitions'
+
+            paramDefs << 'com.seitenbau.jenkins.plugins.dynamicparameter.StringParameterDefinition' {
+                delegate.createNode('name', 'BRANCHSPEC')
+                delegate.createNode('__script', 'def getversion= ["/bin/bash", "-c", "cd /var/jenkins_home/version;cat version.txt"].execute().text;def version=getversion.readLines();return version[0]')
+
+                __localBaseDirectory(serialization: 'custom') {
+                    'hudson.FilePath' {
+                        'default' {
+                            delegate.createNode('remote', "${JENKINS_HOME}/dynamic_parameter/classpath")
+                        }
+                        delegate.createNode('boolean', true)
+                    }
+                }
+
+                delegate.createNode('__remoteBaseDirectory', 'dynamic_parameter_classpath')
+                delegate.createNode('__classPath', '')
+            }
+        }
+        cpsScm {
+            scm {
+                git {
+                    remote {
+                        url('https://github.com/HomeCI/jenkins.git')
+                    }
+                    branch('$BRANCHSPEC')
+                }
+            }
+            scriptPath("pipelines/docker/dockerBuild.groovy")
         }
     }
-}
