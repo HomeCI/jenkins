@@ -13,8 +13,8 @@ pipelineJob('WebHook') {
             }
             genericRequestVariables {
                 genericRequestVariable {
-                key("requestParameterName")
-                regexpFilter("")
+                key("everything")
+                regexpFilter("\$")
                 }
             }
             genericHeaderVariables {
