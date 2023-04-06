@@ -1,11 +1,17 @@
 library 'hci@main'
-import groovy.json.JsonSlurper
-node(){
-    stage('Clonando repositorio'){
-        //sh "echo $ref"
-        println("Aqui")
-        repo = sh ( script: "echo $ref_repository_git_url",returnStdout: true).trim()
-        println("Repositorio: ${repo}" )
 
+node(){
+    stage('Checking'){
+        repourl = sh ( script: "echo $ref_repository_clone_url",returnStdout: true).trim()
+        println("Repositorio: ${repourl}" )
+        checkout([
+            $class: 'GitSCM',
+            branches: [[name: 'main']],
+            userRemoteConfigs: [[url: repourl]],
+            extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'repo']]
+        ])
+        dir('repo'){
+            load('Jenkinsfile')
+        }
     }
 }
