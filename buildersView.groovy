@@ -1,4 +1,4 @@
-listView('Builders') {
+listView('HCI Builders') {
     description('Builders')
     jobs {
         name('DockerBuild')
