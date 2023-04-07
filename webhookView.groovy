@@ -1,4 +1,4 @@
-listView('Webhooks') {
+listView('HCI Webhooks') {
     description('Webhooks')
     jobs {
         name('WebhookOrchestrator')
