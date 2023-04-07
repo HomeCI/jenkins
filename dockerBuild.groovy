@@ -1,4 +1,5 @@
 pipelineJob('DockerBuild') {
+    description(" 🐋 Realiza las gestiones de docker build, promoción de la imagen al registry y deploy del docker-compose")
     parameters {
         stringParam {
             name('gitrepourl')
