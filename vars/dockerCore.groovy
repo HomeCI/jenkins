@@ -30,7 +30,7 @@ def call(Map params) {
             errorCount++
         }
 
-        if (deploy && ( utils.fileExists(dockercomposePath,'docker-compose.yaml') || utils.fileExists(dockercomposePath,'docker-compose.yml')) {
+        if (deploy && ( utils.fileExists(dockercomposePath,'docker-compose.yaml') || utils.fileExists(dockercomposePath,'docker-compose.yml'))) {
             println("El archivo docker-compose.yml no se encuentra en la ruta especificada.")
             errorCount++
         }
