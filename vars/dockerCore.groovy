@@ -27,7 +27,7 @@ def call(Map params) {
 
         if (dbuild && utils.fileExists(dockerfilePath,'Dockerfile')) {
             println("El archivo Dockerfile no se encuentra en la ruta especificada.")
-            //errorCount++
+            errorCount++
         }
 
         if (deploy && ( utils.fileExists(dockercomposePath,'docker-compose.yaml') || utils.fileExists(dockercomposePath,'docker-compose.yml')) {
@@ -35,10 +35,6 @@ def call(Map params) {
             errorCount++
         }
 
-        if (pullToRegistry && !tagname.matches("^(?:(?=[^:/]{1,253})(?!-)[a-zA-Z0-9-]{1,63}(?<!-)(?:.(?!-)[a-zA-Z0-9-]{1,63}(?<!-))*(?::[0-9]{1,5})?/)?((?![._-])(?:[a-z0-9._-]*)(?<![._-])(?:/(?![._-])[a-z0-9._-]*(?<![._-]))*)(?::(?![.-])[a-zA-Z0-9_.-]{1,128})?\$")) {
-            println("El nombre de etiqueta de DockerHub no cumple con la sintaxis de etiqueta de imagen de Docker.")
-            errorCount++
-        }
 
         if (errorCount > 0) {
             asciiBox("Revise los errores detectados")
