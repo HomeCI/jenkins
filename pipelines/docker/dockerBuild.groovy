@@ -5,7 +5,7 @@ node(){
         checkout([
             $class: 'GitSCM',
             branches: [[name: 'main']],
-            userRemoteConfigs: [[url: 'https://github.com/alpeza/DummyWeb.git']],
+            userRemoteConfigs: [[url: params.gitrepourl]],
             extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'repo']]
         ])
     }

@@ -1,6 +1,11 @@
 pipelineJob('DockerBuild') {
     parameters {
         stringParam {
+            name('gitrepourl')
+            defaultValue('')
+            description('Url del repositorio `https://github.com/.../...` ')
+        }
+        stringParam {
             name('tagname')
             defaultValue('')
             description('Nombre de la etiqueta para la imagen de Docker')
