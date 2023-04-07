@@ -1,5 +1,5 @@
 pipelineJob('WebhookOrchestrator') {
-    description('Pipeline template de ejemplo')
+    description('Webhook de orquestración')
     triggers {
         genericTrigger {
             genericVariables {
