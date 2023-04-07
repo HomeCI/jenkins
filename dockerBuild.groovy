@@ -7,6 +7,11 @@ pipelineJob('DockerBuild') {
             description('Url del repositorio `https://github.com/.../...` ')
         }
         stringParam {
+            name('repobranch')
+            defaultValue('main')
+            description('Rama que se va a utilizar ej: main, feature/mynewfeature, release/1.0.0')
+        }
+        stringParam {
             name('tagname')
             defaultValue('')
             description('Nombre de la etiqueta para la imagen de Docker')

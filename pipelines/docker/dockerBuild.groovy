@@ -4,7 +4,7 @@ node(){
     stage('Checkout'){
         checkout([
             $class: 'GitSCM',
-            branches: [[name: 'main']],
+            branches: [[name: params.repobranch]],
             userRemoteConfigs: [[url: params.gitrepourl]],
             extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'repo']]
         ])

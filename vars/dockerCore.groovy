@@ -58,6 +58,7 @@ def call(Map params) {
         sh """
         set -x 
         cd ${dockercomposePath}
+        docker compose down --remove-orphans
         docker compose up -d
         """
     }
