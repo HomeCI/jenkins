@@ -17,5 +17,6 @@ node(){
                    dockercomposePath: params.dockercomposePath,
                    credentialsId: params.credentialsId,
                    pullToRegistry: params.pullToRegistry
+                   gitrepourl: params.gitrepourl
     }
 }

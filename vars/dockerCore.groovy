@@ -9,6 +9,7 @@ def call(Map params) {
     boolean pullToRegistry = params.pullToRegistry != null ? params.pullToRegistry : false
     
     String repoUrl = params.gitrepourl
+    println(repoUrl)
     String repoName = utils.extractRepoName(repoUrl)
     String repoPath = "/home/$repoName"
 
