@@ -8,6 +8,10 @@ def call(Map params) {
     String credentialsId = params.credentialsId
     boolean pullToRegistry = params.pullToRegistry != null ? params.pullToRegistry : false
     
+    String repoUrl = params.gitrepourl
+    String repoName = utils.extractRepoName(repoUrl)
+    String repoPath = "/home/$repoName"
+
     /** Input */
     stage('Validating input'){
         int errorCount = 0
@@ -45,32 +49,52 @@ def call(Map params) {
     }
 
     stage('Building'){
-       asciiBox("Construyendo la imagen ...")
-       sh """
-       set -x 
-       cd ${dockerfilePath}
-       docker build -t ${tagname} .
-       """
+       if(dbuild){
+        asciiBox("Construyendo la imagen ...")
+        sh """
+        set -x 
+        cd ${dockerfilePath}
+        docker build -t ${tagname} .
+        """
+       }
     }
 
     stage('Deploying'){
-        asciiBox("Desplegando el compose ... ")
-        sh """
-        set -x 
-        cd ${dockercomposePath}
-        docker compose down --remove-orphans
-        docker compose up -d
-        """
+        if (deploy) {
+            asciiBox("Desplegando el compose ... ")
+            /*
+            sh """
+            set -x 
+            cd ${dockercomposePath}
+            docker compose down --remove-orphans
+            docker compose up -d
+            """
+            */
+            sh """
+            set -x 
+            if [ -d ${repoPath} ]; then
+                find ${repoPath} -mindepth 1 -not -name '_*' -delete
+            else
+                mkdir -p ${repoPath}
+            fi
+            cp -Rn . ${repoPath}
+            cd ${repoPath} && cd ${dockercomposePath}
+            docker compose down --remove-orphans
+            docker compose up -d
+            """
+        }
     }
 
     stage('Promoting'){
-        asciiBox("Promocionando imagen ... ")
-        withCredentials([usernamePassword(credentialsId: credentialsId, passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
-            sh """
-            set -x;
-            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
-            docker push ${tagname}
-            """
+        if(pullToRegistry){
+            asciiBox("Promocionando imagen ... ")
+            withCredentials([usernamePassword(credentialsId: credentialsId, passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
+                sh """
+                set -x;
+                docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+                docker push ${tagname}
+                """
+            }
         }
     }
 

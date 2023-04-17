@@ -19,3 +19,9 @@ def fileExists(String path, String fileName) {
         return false
     }
 }
+
+def extractRepoName(url) {
+    //Extrae el nombre de un repositorio a partir de su url.
+    def matcher = url =~ /\/([^\/]+)\.git$/
+    return matcher[0][1]
+}
