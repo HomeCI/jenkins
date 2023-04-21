@@ -55,7 +55,7 @@ def call(Map params) {
             sh """
             set -x 
             cd ${dockerfilePath}
-            #docker build -t ${tagname} .
+            docker build -t ${tagname} .
             """
        }
     }
