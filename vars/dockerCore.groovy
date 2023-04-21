@@ -51,12 +51,12 @@ def call(Map params) {
 
     stage('Building'){
        if(dbuild){
-        asciiBox("Construyendo la imagen ...")
-        sh """
-        set -x 
-        cd ${dockerfilePath}
-        docker build -t ${tagname} .
-        """
+            asciiBox("Construyendo la imagen ...")
+            sh """
+            set -x 
+            cd ${dockerfilePath}
+            #docker build -t ${tagname} .
+            """
        }
     }
 
